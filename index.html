@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OkieDokiePokeRealShop</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=CAWNMV5KP2V7G&currency=USD"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>🐟 OkieDokiePokeRealShop</h1>
+  <button onclick="login()">🔐 Login</button>
+  <button onclick="addProduct()" id="addBtn" style="display:none;">➕ Add Product</button>
+</header>
+
+<div class="shop"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
