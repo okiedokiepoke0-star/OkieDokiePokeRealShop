@@ -18,17 +18,17 @@ function login() {
   auth.signInWithPopup(provider);
 }
 
-// Show add button only for admin
+// Only show add button for admin
 auth.onAuthStateChanged(user => {
   if (user && user.uid === ADMIN_UID) {
     document.getElementById("addBtn").style.display = "inline-block";
   }
 });
 
-// Live products
+// Live products — everyone sees them
 db.collection("products").onSnapshot(snapshot => {
   const shop = document.querySelector('.shop');
-  shop.innerHTML = "";
+  shop.innerHTML = ""; // clear before adding
   snapshot.forEach(doc => {
     const product = doc.data();
     const id = "paypal-" + doc.id;
@@ -43,6 +43,7 @@ db.collection("products").onSnapshot(snapshot => {
     `;
     shop.appendChild(div);
 
+    // PayPal buttons
     paypal.Buttons({
       createOrder: (data, actions) => {
         return actions.order.create({
@@ -52,16 +53,3 @@ db.collection("products").onSnapshot(snapshot => {
     }).render(`#${id}`);
   });
 });
-
-// Add product (admin only)
-function addProduct() {
-  const user = auth.currentUser;
-  if (!user || user.uid !== ADMIN_UID) return alert("Not allowed");
-
-  const name = prompt("Product name:");
-  const price = prompt("Price:");
-  const image = prompt("Image URL:");
-  if (!name || !price) return;
-
-  db.collection("products").add({ name, price, image });
-}
